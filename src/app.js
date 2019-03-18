@@ -5,7 +5,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
-const { NODE_ENV } = require('./config')
+const { NODE_ENV } = require('./config');
 
 const app = express();
 
@@ -13,12 +13,20 @@ const morganOption = (NODE_ENV === 'production')
   ? 'tiny'
   : 'common';
 
-app.use(morgan(morganOption));
-app.use(cors());
-app.use(helmet());
+const book = 
+{
+  name: 'The Hound of the Baskervilles',
+  author: 'Sir Arthur Conan Doyle', 
+  description: 'The story of an attempted murder inspired by the legend of a fearsome, diabolical hound of supernatural origin',
+  image: 'https://en.wikipedia.org/wiki/File:Cover_(Hound_of_Baskervilles,_1902).jpg'
+};
 
-app.get('/', (req, res) => {
-  res.send('Hello, boilerplate!');
+app.use(morgan(morganOption));
+app.use(helmet());
+app.use(cors());
+
+app.get('/api/recommendation/', (req, res) => {
+  res.status(200).json(book);
 });
 
 app.use(function errorHandler(error, req, res, next) {

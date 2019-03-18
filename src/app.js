@@ -18,16 +18,19 @@ const book =
   name: 'The Hound of the Baskervilles',
   author: 'Sir Arthur Conan Doyle', 
   description: 'The story of an attempted murder inspired by the legend of a fearsome, diabolical hound of supernatural origin',
-  image: 'https://en.wikipedia.org/wiki/File:Cover_(Hound_of_Baskervilles,_1902).jpg'
+  image: 'http://www.loyalbooks.com/image/detail/Hound-of-the-Baskervilles.jpg'
 };
 
 app.use(morgan(morganOption));
 app.use(helmet());
 app.use(cors());
 
-app.get('/api/recommendation/', (req, res) => {
-  res.status(200).json(book);
+app.get('/api/recommendation', (req, res) => {
+  return res.status(200).json(book);
 });
+
+app.post('/api/users', (req, res, next) =>{
+}); 
 
 app.use(function errorHandler(error, req, res, next) {
   let response;

@@ -23,15 +23,16 @@ const db = knex({
   connection: 'postgresql://postgres@localhost/bibliomancer'
 });
 
-const recommendation = (db) => {
+const recommendation = (db, genre) => {
   return db
     .from('recommendations')
     .select('*')
-    .where( {id: 1} );   
+    .where( 'genre', genre );     
 };  
 
 app.get('/api/recommendation', (req, res) => {
-  recommendation(db)
+  const genre = req.query.genre;
+  recommendation(db, genre)
     .then(results =>{
       return res.status(200)
         .json(results);

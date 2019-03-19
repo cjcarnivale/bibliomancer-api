@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
+const knex = require('knex'); 
 
 const app = express();
 
@@ -13,21 +14,31 @@ const morganOption = (NODE_ENV === 'production')
   ? 'tiny'
   : 'common';
 
-const book = 
-{
-  name: 'The Hound of the Baskervilles',
-  author: 'Sir Arthur Conan Doyle', 
-  description: 'The story of an attempted murder inspired by the legend of a fearsome, diabolical hound of supernatural origin',
-  image: 'http://www.loyalbooks.com/image/detail/Hound-of-the-Baskervilles.jpg'
-};
-
 app.use(morgan(morganOption));
 app.use(helmet());
 app.use(cors());
 
-app.get('/api/recommendation', (req, res) => {
-  return res.status(200).json(book);
+const db = knex({
+  client: 'pg',
+  connection: 'postgresql://postgres@localhost/bibliomancer'
 });
+
+const recommendation = (db) => {
+  return db
+    .from('recommendations')
+    .select('*')
+    .where( {id: 1} );   
+};  
+
+app.get('/api/recommendation', (req, res) => {
+  recommendation(db)
+    .then(results =>{
+      return res.status(200)
+        .json(results);
+    })
+    .catch(err => res.status(500).json({message: 'Server Error'})); 
+});
+
 
 app.post('/api/users', (req, res, next) =>{
 }); 

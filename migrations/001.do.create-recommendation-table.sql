@@ -1,0 +1,8 @@
+CREATE TABLE RECOMMENDATIONS(
+  id SERIAL PRIMARY KEY,
+  title TEXT NOT NULL,
+  author TEXT NOT NULL,
+  description TEXT NOT NULL,
+  image TEXT NOT NULL,
+  genre TEXT NOT NULL
+); 

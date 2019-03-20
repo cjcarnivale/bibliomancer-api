@@ -5,7 +5,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
-const { NODE_ENV } = require('./config');
+const { NODE_ENV, DB_URL } = require('./config');
 const knex = require('knex'); 
 
 const app = express();
@@ -20,7 +20,7 @@ app.use(cors());
 
 const db = knex({
   client: 'pg',
-  connection: process.env.DB_URL
+  connection: DB_URL
 });
 
 const recommendation = (db, genre) => {

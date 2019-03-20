@@ -1,4 +1,5 @@
 -- psql -d bibliomancer -U postgres -f ./seeds/seed-recommendations.sql
+-- psql postgres://nddpfuxgkjsltb:4a8973eb9a57a14f493869f2417b947143c77333388fe6ea2024996744d3dc3f@ec2-174-129-10-235.compute-1.amazonaws.com:5432/dd3baghnfircgh -f ./seeds/seed-recommendations.sql
 
 INSERT INTO RECOMMENDATIONS (title, author, description, image, genre)
 VALUES

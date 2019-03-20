@@ -20,7 +20,7 @@ app.use(cors());
 
 const db = knex({
   client: 'pg',
-  connection: 'postgresql://postgres@localhost/bibliomancer'
+  connection: process.env.DB_URL
 });
 
 const recommendation = (db, genre) => {

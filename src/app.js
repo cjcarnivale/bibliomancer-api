@@ -40,6 +40,19 @@ app.get('/api/recommendation', (req, res) => {
     .catch(err => res.status(500).json({message: 'Server Error'})); 
 });
 
+app.get('/api/allbooks', (req, res, next) => { 
+  db.from('recommendations')
+    .select('*')
+    .then(allBooks=>{res.json(allBooks);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/distinct', (req, res, next) =>{
+  db.raw('SELECT DISTINCT genre FROM recommendations')
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
 
 app.post('/api/users', (req, res, next) =>{
 }); 

@@ -30,12 +30,6 @@ app.get('/api/allbooks', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/distinct', (req, res, next) =>{
-  req.app.get('db').raw('SELECT DISTINCT genre FROM recommendations')
-    .then(result => res.json(result.rows))
-    .catch(err => next(err));
-});
-
 app.use(function errorHandler(error, req, res, next) {
   let response;
   if (NODE_ENV === 'production') {

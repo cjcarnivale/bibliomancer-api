@@ -16,10 +16,10 @@ const morganOption = (NODE_ENV === 'production')
 app.use(morgan(morganOption));
 app.use(helmet());
 app.use(cors({
-  "origin": "*",
-  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-  "preflightContinue": false,
-  "optionsSuccessStatus": 204
+  'origin': '*',
+  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  'preflightContinue': false,
+  'optionsSuccessStatus': 204
 }));
 
 app.get('/api/allbooks', (req, res, next) => { 
